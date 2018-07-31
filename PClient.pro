@@ -15,13 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         login.cpp \
     qss/qss.cpp \
-    controller/database.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    clientthread.cpp \
+    controller/fileutil.cpp
 
 HEADERS  += login.h \
     qss/qss.h \
     controller/database.h \
-    mainwindow.h
+    mainwindow.h \
+    clientthread.h \
+    controller/fileutil.h
 
 FORMS    += login.ui \
     mainwindow.ui
