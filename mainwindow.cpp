@@ -43,19 +43,8 @@ void MainWindow::initTable()
     ui->tableView->setModel(model);
     ui->tableView->hideColumn(0);
     ui->tableView->hideColumn(5);
-}
-
-void MainWindow::refreshTable()
-{
-    model->setQuery("select * from send_record where flag=0");
-    model->setHeaderData(1, Qt::Horizontal, tr("文件名"));
-    model->setHeaderData(2, Qt::Horizontal, tr("文件大小"));
-    model->setHeaderData(3, Qt::Horizontal, tr("类型"));
-    model->setHeaderData(4, Qt::Horizontal, tr("发送状态"));
-    ResizeTableView(ui->tableView);
-    ui->tableView->setModel(model);
-    ui->tableView->hideColumn(0);
-    ui->tableView->hideColumn(5);
+    ui->tableView->hideColumn(6);
+    ui->tableView->hideColumn(7);
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
@@ -70,7 +59,7 @@ void MainWindow::on_selectFile_clicked()
         for(int i=0;i<fileList.size();i++){
             QFileInfo info(fileList.at(i));
             if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentText())){
-                refreshTable();
+                initTable();
                 continue;
             }
             else{
@@ -101,16 +90,17 @@ void MainWindow::on_sendAll_clicked()
         clientVec.at(i)->start();
     }
     clientVec.clear();
+    fileList.clear();
 }
 
 void MainWindow::updateTableview(const QString &fileName)
 {
     fileUtil->updateItem(fileName);
-    refreshTable();
+    initTable();
 }
 
 void MainWindow::on_clearButton_clicked()
 {
     fileUtil->deleteAll();
-    refreshTable();
+    initTable();
 }

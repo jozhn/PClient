@@ -8,7 +8,6 @@
 #include "clientthread.h"
 #include "controller/fileutil.h"
 #include <QVector>
-#include <QStandardItemModel>
 #include <QTableView>
 #include <QEvent>
 
@@ -27,7 +26,6 @@ public:
     ~MainWindow();
     void ResizeTableView(QTableView *tableview);
     void initTable();
-    void refreshTable();
 
 private:
     Ui::MainWindow *ui;
