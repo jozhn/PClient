@@ -7,11 +7,10 @@ class FileUtil
 {
 public:
     FileUtil();
-    bool addItem(QString fileName,qint64 fileSize,QString type);
+    bool addItem(QString fileName, qint64 fileSize, QString type, QString location);
     bool updateItem(QString fileName);
     bool deleteItem();
     bool deleteAll();
-    bool importItem();
     void setModel();
     QSqlQueryModel *getModel();
     QSqlQueryModel *model;

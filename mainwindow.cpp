@@ -4,6 +4,7 @@
 #include <QFileDialog>
 #include <QHostAddress>
 #include <QMessageBox>
+#include <QSqlQuery>
 #include <iostream>
 #include <controller/database.h>
 #include <QDebug>
@@ -38,13 +39,11 @@ void MainWindow::initTable()
     model->setHeaderData(1, Qt::Horizontal, tr("文件名"));
     model->setHeaderData(2, Qt::Horizontal, tr("文件大小"));
     model->setHeaderData(3, Qt::Horizontal, tr("类型"));
-    model->setHeaderData(4, Qt::Horizontal, tr("发送状态"));
+    model->setHeaderData(4, Qt::Horizontal, tr("地点"));
+    model->setHeaderData(5, Qt::Horizontal, tr("发送状态"));
     ResizeTableView(ui->tableView);
     ui->tableView->setModel(model);
     ui->tableView->hideColumn(0);
-    ui->tableView->hideColumn(5);
-    ui->tableView->hideColumn(6);
-    ui->tableView->hideColumn(7);
 }
 
 void MainWindow::closeEvent(QCloseEvent *e)
@@ -54,11 +53,12 @@ void MainWindow::closeEvent(QCloseEvent *e)
 
 void MainWindow::on_selectFile_clicked()
 {
-    fileList = QFileDialog::getOpenFileNames(this,tr("文件选择"),tr("/"),tr("图片文件(*.png *.jpg)"));
-    if(!fileList.isEmpty()){
-        for(int i=0;i<fileList.size();i++){
-            QFileInfo info(fileList.at(i));
-            if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentText())){
+    QStringList tempList = QFileDialog::getOpenFileNames(this,tr("文件选择"),tr("/"),tr("图片文件(*.png *.jpg)"));
+    fileList += tempList;
+    if(!tempList.isEmpty()){
+        for(int i=0;i<tempList.size();i++){
+            QFileInfo info(tempList.at(i));
+            if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentText(),ui->location->currentText())){
                 initTable();
                 continue;
             }
@@ -78,8 +78,6 @@ void MainWindow::on_sendAll_clicked()
         QssMessageBox::warn("文件不能为空",this,tr("警告"));
         return;
     }
-    //弹窗时发送按钮不能用
-//    ui->pushButtonSend->setEnabled(false);
     for(int i=0;i<fileList.size();i++){
         QString host = ui->ipEdit->text();
         quint16 port = ui->portEdit->text().toUInt();
@@ -102,5 +100,6 @@ void MainWindow::updateTableview(const QString &fileName)
 void MainWindow::on_clearButton_clicked()
 {
     fileUtil->deleteAll();
+    fileList.clear();
     initTable();
 }

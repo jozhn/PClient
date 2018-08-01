@@ -7,15 +7,16 @@ FileUtil::FileUtil()
 {
 }
 
-bool FileUtil::addItem(QString fileName,qint64 fileSize,QString type)
+bool FileUtil::addItem(QString fileName,qint64 fileSize,QString type,QString location)
 {
     QSqlQuery query;
-    query.prepare("insert into send_record (filename,filesize,type) "
+    query.prepare("insert into send_record (filename,filesize,type,location) "
                   "values"
-                   " (:filename,:filesize,:type);");
+                   " (:filename,:filesize,:type,:location);");
     query.bindValue(":filename",fileName);
     query.bindValue(":filesize",fileSize);
     query.bindValue(":type",type);
+    query.bindValue(":location",location);
     bool success = query.exec();
     if(success){
         return true;
@@ -44,7 +45,7 @@ bool FileUtil::deleteItem()
 bool FileUtil::deleteAll()
 {
     QSqlQuery query;
-    QString sql = "update send_record set flag=1 where flag=0";
+    QString sql = "update send_record set send_flag=1 where send_flag=0";
     bool success = query.exec(sql);
     if(success){
         return true;
@@ -53,15 +54,11 @@ bool FileUtil::deleteAll()
         return false;
 }
 
-bool FileUtil::importItem()
-{
-
-}
 
 void FileUtil::setModel()
 {
     model = new QSqlQueryModel;
-    model->setQuery("SELECT * FROM send_record where flag=0");
+    model->setQuery("SELECT id,filename,filesize,type,location,send_state FROM send_record where send_flag=0");
 }
 
 QSqlQueryModel *FileUtil::getModel()

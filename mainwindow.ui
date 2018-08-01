@@ -135,6 +135,40 @@
        </widget>
       </item>
       <item>
+       <widget class="QComboBox" name="location">
+        <item>
+         <property name="text">
+          <string>丹锡高速</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>阜锦高速</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>辽中环线高速</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>辽开高速</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>鹤大高速</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>丹阜高速</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="sendAll">
         <property name="text">
          <string>一键发送</string>
