@@ -7,6 +7,20 @@ FileUtil::FileUtil()
 {
 }
 
+void FileUtil::addType(QComboBox *typebox)
+{
+    QSqlQuery query;
+    QString sql = QString("select * from type");
+    query.exec(sql);
+    int i=0,id;QString type;
+    while(query.next()){
+        id = query.value("id").toInt();
+        type = query.value("type").toString();
+        typebox->insertItem(i,type,QString::number(id));
+        i++;
+    }
+}
+
 bool FileUtil::addItem(QString fileName,qint64 fileSize,int type,QString location)
 {
     QSqlQuery query;
