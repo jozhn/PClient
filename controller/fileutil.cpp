@@ -21,16 +21,17 @@ void FileUtil::addType(QComboBox *typebox)
     }
 }
 
-bool FileUtil::addItem(QString fileName,qint64 fileSize,int type,QString location)
+bool FileUtil::addItem(QString fileName,qint64 fileSize,int type,QString location,QDateTime datetime)
 {
     QSqlQuery query;
-    query.prepare("insert into send_record (filename,filesize,type,location) "
+    query.prepare("insert into send_record (filename,filesize,type,location,datetime) "
                   "values"
-                   " (:filename,:filesize,:type,:location);");
+                   " (:filename,:filesize,:type,:location,:datetime);");
     query.bindValue(":filename",fileName);
     query.bindValue(":filesize",fileSize);
     query.bindValue(":type",type);
     query.bindValue(":location",location);
+    query.bindValue(":datetime",datetime);
     bool success = query.exec();
     if(success){
         return true;

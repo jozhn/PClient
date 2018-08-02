@@ -8,6 +8,7 @@
 #include <iostream>
 #include <controller/database.h>
 #include <QDebug>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent) :
     QssMainWindow(parent),
@@ -60,7 +61,7 @@ void MainWindow::on_selectFile_clicked()
     if(!tempList.isEmpty()){
         for(int i=0;i<tempList.size();i++){
             QFileInfo info(tempList.at(i));
-            if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentData().toInt(),ui->location->currentText())){
+            if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentData().toInt(),ui->location->currentText(),QDateTime::currentDateTime())){
                 initTable();
                 continue;
             }
