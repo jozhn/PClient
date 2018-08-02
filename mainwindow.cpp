@@ -58,7 +58,7 @@ void MainWindow::on_selectFile_clicked()
     if(!tempList.isEmpty()){
         for(int i=0;i<tempList.size();i++){
             QFileInfo info(tempList.at(i));
-            if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentText(),ui->location->currentText())){
+            if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentData(),ui->location->currentText())){
                 initTable();
                 continue;
             }

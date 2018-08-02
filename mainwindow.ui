@@ -91,48 +91,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="type">
-        <item>
-         <property name="text">
-          <string>正常通过</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>超速</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>逆行</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>违停</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>超员</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>超重</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>疲劳驾驶</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>酒后驾驶</string>
-         </property>
-        </item>
-       </widget>
+       <widget class="QComboBox" name="type"/>
       </item>
       <item>
        <widget class="QComboBox" name="location">

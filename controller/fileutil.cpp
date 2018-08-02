@@ -7,7 +7,7 @@ FileUtil::FileUtil()
 {
 }
 
-bool FileUtil::addItem(QString fileName,qint64 fileSize,QString type,QString location)
+bool FileUtil::addItem(QString fileName,qint64 fileSize,int type,QString location)
 {
     QSqlQuery query;
     query.prepare("insert into send_record (filename,filesize,type,location) "
@@ -58,7 +58,7 @@ bool FileUtil::deleteAll()
 void FileUtil::setModel()
 {
     model = new QSqlQueryModel;
-    model->setQuery("SELECT id,filename,filesize,type,location,send_state FROM send_record where send_flag=0");
+    model->setQuery("SELECT s.id,s.filename,s.filesize,t.type,s.location,s.send_state FROM send_record s,type t where t.id=s.type and s.send_flag=0");
 }
 
 QSqlQueryModel *FileUtil::getModel()

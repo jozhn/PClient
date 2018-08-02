@@ -7,7 +7,7 @@ class FileUtil
 {
 public:
     FileUtil();
-    bool addItem(QString fileName, qint64 fileSize, QString type, QString location);
+    bool addItem(QString fileName, qint64 fileSize, int type, QString location);
     bool updateItem(QString fileName);
     bool deleteItem();
     bool deleteAll();
