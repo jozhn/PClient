@@ -15,7 +15,7 @@ clientThread::clientThread(QString host, quint16 port)
 
     m_Run = true;
     m_Pause = false;
-    m_socket = new QTcpSocket;
+//    m_socket = new QTcpSocket(this);
     this->host=host;
     this->port=port;
 }
@@ -61,6 +61,7 @@ void clientThread::sendFile(const QString &file)
 
 void clientThread::run()
 {
+    m_socket = new QTcpSocket();
      m_socket->connectToHost(host, port);
     //qDebug() << "Connected";
     //QFile file("文件名或者带文件名的路径")：打开一个文件的方式有2种
