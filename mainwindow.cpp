@@ -1,12 +1,13 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "clientthread.h"
+#include <controller/database.h>
+#include <form/queryhistorydialog.h>
 #include <QFileDialog>
 #include <QHostAddress>
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <iostream>
-#include <controller/database.h>
 #include <QDebug>
 #include <QDateTime>
 
@@ -21,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     fileUtil = new FileUtil();
     initTable();
     fileUtil->addType(ui->type);
-//    ui->type->insertItem(1,"正常通行","11");
 }
 
 MainWindow::~MainWindow()
@@ -105,4 +105,10 @@ void MainWindow::on_clearButton_clicked()
     fileUtil->deleteAll();
     fileList.clear();
     initTable();
+}
+
+void MainWindow::on_queryButton_clicked()
+{
+    QueryHistoryDialog * q  = new QueryHistoryDialog();
+    q->show();
 }

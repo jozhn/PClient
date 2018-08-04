@@ -40,6 +40,7 @@ private slots:
     void on_sendAll_clicked();
     void updateTableview(const QString &fileName);
     void on_clearButton_clicked();
+	void on_queryButton_clicked();
 };
 
 #endif // MAINWINDOW_H

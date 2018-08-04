@@ -17,17 +17,20 @@ SOURCES += main.cpp\
     qss/qss.cpp \
     mainwindow.cpp \
     clientthread.cpp \
-    controller/fileutil.cpp
+    controller/fileutil.cpp \
+    form/queryhistorydialog.cpp
 
 HEADERS  += login.h \
     qss/qss.h \
     controller/database.h \
     mainwindow.h \
     clientthread.h \
-    controller/fileutil.h
+    controller/fileutil.h \
+    form/queryhistorydialog.h
 
 FORMS    += login.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    form/queryhistorydialog.ui
 
 RESOURCES += \
     app.qrc \
