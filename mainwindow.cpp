@@ -112,3 +112,9 @@ void MainWindow::on_queryButton_clicked()
     QueryHistoryDialog * q  = new QueryHistoryDialog();
     q->show();
 }
+
+void MainWindow::on_logoutButton_clicked()
+{
+    //
+    this->closeWindow();
+}

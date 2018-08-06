@@ -76,6 +76,13 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="logoutButton">
+        <property name="text">
+         <string>退出</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
@@ -151,7 +158,7 @@
      <x>0</x>
      <y>0</y>
      <width>700</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>

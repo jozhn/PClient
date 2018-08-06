@@ -41,6 +41,7 @@ private slots:
     void updateTableview(const QString &fileName);
     void on_clearButton_clicked();
 	void on_queryButton_clicked();
+    void on_logoutButton_clicked();
 };
 
 #endif // MAINWINDOW_H
