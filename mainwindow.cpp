@@ -1,5 +1,6 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "login.h"
 #include "clientthread.h"
 #include <controller/database.h>
 #include <form/queryhistorydialog.h>
@@ -10,6 +11,7 @@
 #include <iostream>
 #include <QDebug>
 #include <QDateTime>
+#include <QSettings>
 
 MainWindow::MainWindow(QWidget *parent) :
     QssMainWindow(parent),
@@ -115,6 +117,17 @@ void MainWindow::on_queryButton_clicked()
 
 void MainWindow::on_logoutButton_clicked()
 {
-    //
+    QString path = QString("./user.ini");
+
+    //创建文件
+    QSettings * config =  new QSettings(path,QSettings::IniFormat);
+
+    //写入
+    config->beginGroup("config");
+    config->setValue("auto_states",QString::number(0));
+    config->endGroup();
+
+    Login *l=new Login();
+    l->show();
     this->closeWindow();
 }
