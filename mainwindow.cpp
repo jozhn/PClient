@@ -12,6 +12,9 @@
 #include <QDebug>
 #include <QDateTime>
 #include <QSettings>
+#include <QDragEnterEvent>
+#include <QDropEvent>
+#include <QMimeData>
 
 MainWindow::MainWindow(QWidget *parent) :
     QssMainWindow(parent),
@@ -29,6 +32,41 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    //如果类型是jpg或者png才能接受拖动。
+    //这里的compare字符串比较函数，相等的时候返回0，所以要取反
+       if(!event->mimeData()->urls()[0].fileName().right(3).compare("jpg")
+               ||!event->mimeData()->urls()[0].fileName().right(3).compare("png"))
+           event->acceptProposedAction();
+        else
+           event->ignore();//否则不接受鼠标事件
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    qDebug() << "dropEvent";
+
+    QList<QUrl> urls = event->mimeData()->urls();
+    if (urls.isEmpty()) {
+        qDebug() << "Error: urls is empty";
+        return;
+    }
+    for(int i=0;i<urls.size();i++){
+        QFileInfo info(urls.at(i).toLocalFile());
+        fileList.append(urls.at(i).toLocalFile());
+        if(fileUtil->addItem(info.fileName(),info.size(),ui->type->currentData().toInt(),ui->location->currentText(),QDateTime::currentDateTime())){
+            initTable();
+            continue;
+        }
+        else{
+            qDebug()<<"error";
+            break;
+        }
+    }
+//    fileName = urls.first().toLocalFile();
 }
 
 void MainWindow::ResizeTableView(QTableView *tableview)

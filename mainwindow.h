@@ -27,6 +27,10 @@ public:
     void ResizeTableView(QTableView *tableview);
     void initTable();
 
+protected:
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
+
 private:
     Ui::MainWindow *ui;
     FileUtil *fileUtil;
