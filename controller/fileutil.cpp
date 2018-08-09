@@ -73,7 +73,9 @@ bool FileUtil::deleteAll()
 void FileUtil::setModel()
 {
     model = new QSqlQueryModel;
-    model->setQuery("SELECT s.id,s.filename,s.filesize,t.type,s.location,s.send_state FROM send_record s,type t where t.id=s.type and s.send_flag=0");
+    model->setQuery("SELECT s.id,s.filename,s.filesize,t.type,s.location,s.send_state "
+                    "FROM send_record s,type t "
+                    "where t.id=s.type and s.send_flag=0 ORDER BY s.datetime ASC");
 }
 
 QSqlQueryModel *FileUtil::getModel()
